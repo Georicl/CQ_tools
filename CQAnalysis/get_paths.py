@@ -1,5 +1,5 @@
 from os import path
-
+import os
 
 def get_paths(f_bam, m_bam, fasta_path_get, output_path_get_path) -> dict:
     """
@@ -24,6 +24,8 @@ def get_paths(f_bam, m_bam, fasta_path_get, output_path_get_path) -> dict:
             - temp_dir: Directory for intermediate temporary files.
     """
     temp_dir = path.join(output_path_get_path, "temp_dir")
+    if not path.exists(temp_dir):
+        os.makedirs(temp_dir)
     return {
         "fa_path": f"{fasta_path_get}",
         "log_path": path.join(output_path_get_path, "CQ.log"),
