@@ -12,6 +12,7 @@ from CQAnalysis.get_paths import get_paths
 from CQAnalysis.windows_make import MakeWindows
 from CQAnalysis.CQ_runner import CQRunner
 from CQAnalysis.coverage_calculate import CoverageCalculate
+from CQPlot.CQ_plot import CQPlotter
 
 app = typer.Typer(
     help="CQ_tools: A tool for calculating CQ values from sequencing data.",
@@ -111,6 +112,31 @@ def cq(
     logger.info("="*50)
     logger.info(f"CQ Analysis Pipeline Finished. Results: {paths['filtered_cq']}")
     logger.info("="*50)
+
+@app.command()
+def plot(
+    cq_result: str = typer.Option(..., help="Path to the filtered CQ result TSV file."),
+    chrom_length: str = typer.Option(..., help="Path to the chromosome length TSV file."),
+    output: str = typer.Option("CQ_distribution.png", help="Path to save the output plot."),
+    pdf: bool = typer.Option(False, help="Whether to generate a PDF version of the static plot."),
+    html: bool = typer.Option(True, help="Whether to generate an interactive HTML plot."),
+):
+    """
+    Generate visualization plots (Static and/or Interactive) for CQ results.
+    """
+    setup_logging()
+    logger.info("Starting Plotting workflow...")
+    
+    plotter = CQPlotter(
+        cq_paths=cq_result,
+        length_path=chrom_length,
+        output_path=output,
+        pdf_maker=pdf,
+        html_maker=html
+    )
+    
+    plotter.plot_cq()
+    logger.info("Plotting workflow completed.")
 
 
 if __name__ == "__main__":
