@@ -92,6 +92,12 @@ python main.py plot
 - `CQ_distribution.png`: Static genomic distribution plot.
 - `CQ_distribution.html`: Interactive web-based report.
 
+## Author
+
+- **Author**: Yang Xiang
+- **Email**: [georicl@outlook.com](mailto:georicl@outlook.com)
+- **Date**: February 27, 2026
+
 ## License
 
 MIT License

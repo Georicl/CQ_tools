@@ -1,6 +1,9 @@
 """
 Module for genome alignment and processing.
 Handles BWA indexing, alignment, and Samtools processing (BAM conversion, sorting, indexing).
+
+Author: Yang Xiang
+Email: georicl@outlook.com
 """
 import os
 import subprocess

@@ -1,6 +1,9 @@
 """
 Main entry point for CQ_tools.
 Provides CLI commands for sequence alignment and CQ value calculation.
+
+Author: Yang Xiang
+Email: georicl@outlook.com
 """
 import typer
 import logging

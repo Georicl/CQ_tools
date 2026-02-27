@@ -1,3 +1,9 @@
+"""
+Centralized path management for the analysis pipeline.
+
+Author: Yang Xiang
+Email: georicl@outlook.com
+"""
 from os import path
 import os
 

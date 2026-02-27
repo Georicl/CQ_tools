@@ -1,6 +1,9 @@
 """
 Module for genomic window generation.
 Handles FASTA indexing and slicing chromosomes into fixed-size windows.
+
+Author: Yang Xiang
+Email: georicl@outlook.com
 """
 import logging
 import pysam

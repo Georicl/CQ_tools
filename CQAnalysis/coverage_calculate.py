@@ -1,6 +1,9 @@
 """
 Module for calculating sequence coverage across genomic windows.
 Uses bedtools coverage to count reads and calculate the fraction of coverage for each window.
+
+Author: Yang Xiang
+Email: georicl@outlook.com
 """
 import logging
 import os

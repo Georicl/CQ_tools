@@ -1,6 +1,9 @@
 """
 Module for calculating and filtering CQ results.
 Computes the CQ ratio (Female CPM / Male CPM) and filters windows based on user thresholds.
+
+Author: Yang Xiang
+Email: georicl@outlook.com
 """
 import pandas as pd
 import logging

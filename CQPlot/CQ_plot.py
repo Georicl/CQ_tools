@@ -2,6 +2,9 @@
 Module for visualizing CQ filtered results across the genome.
 Generates both static (Matplotlib) and interactive (Plotly) distribution plots
 to visualize specific genomic regions identified through CQ analysis.
+
+Author: Yang Xiang
+Email: georicl@outlook.com
 """
 import pandas as pd
 import matplotlib.pyplot as plt

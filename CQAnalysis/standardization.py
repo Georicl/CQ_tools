@@ -1,6 +1,9 @@
 """
 Module for CPM (Counts Per Million) normalization.
 Calculates normalization factors based on total mapped reads from BAM files.
+
+Author: Yang Xiang
+Email: georicl@outlook.com
 """
 import subprocess
 import pandas as pd
