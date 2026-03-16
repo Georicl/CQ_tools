@@ -75,9 +75,6 @@ uv run python main.py cq
     --f-bam female_sorted.bam 
     --m-bam male_sorted.bam 
     --output-dir ./cq_results 
-    --cq-value 0.3 
-    --threshold 0 
-    --parallel 2
 ```
 
 #### CPM Calculation Principle
@@ -111,7 +108,6 @@ uv run python main.py plot
     --cq-result cq_results/F_M_CQ.filter.tsv 
     --chrom-length cq_results/chromosome_length.tsv 
     --output distribution.png 
-    --html
 ```
 
 #### Parameter Details:

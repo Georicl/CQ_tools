@@ -1,7 +1,7 @@
 [project]
 name = "cq-tools"
 version = "0.1.0"
-description = "Add your description here"
+description = "CQ calculate software"
 requires-python = ">=3.11"
 dependencies = [
     "matplotlib>=3.10.8",
