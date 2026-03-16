@@ -3,6 +3,7 @@ name = "cq-tools"
 version = "0.1.0"
 description = "CQ calculate software"
 requires-python = ">=3.11"
+authors = [{ name = "Yang Xiang", email = "georicl@outlook.com" }]
 dependencies = [
     "matplotlib>=3.10.8",
     "pandas>=3.0.1",
@@ -10,3 +11,10 @@ dependencies = [
     "pysam>=0.23.3",
     "typer>=0.24.1",
 ]
+
+[project.scripts]
+cq-tools = "main:app"
+
+[tool.setuptools]
+packages = ["CQPlot", "CQAligent", "CQAnalysis"]
+py-modules=["main"]

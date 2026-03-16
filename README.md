@@ -21,9 +21,15 @@ CQ_tools is a comprehensive bioinformatics pipeline designed for calculating and
 - [Samtools](http://www.htslib.org/)
 - [bedtools](https://bedtools.readthedocs.io/)
 
-### Setup
+### Option 1: Install from GitHub Release (Recommended for Users)
 
-We recommend using `uv` for dependency management:
+You can download the `.whl` file from the [Latest Release](https://github.com/yourusername/CQ_tools/releases) and install it using pip:
+
+```bash
+pip install cq_tools-0.1.0-py3-none-any.whl
+```
+
+### Option 2: Install for Development (Using uv)
 
 ```bash
 git clone https://github.com/yourusername/CQ_tools.git
@@ -31,26 +37,20 @@ cd CQ_tools
 uv sync
 ```
 
-Or install via `pip`:
-
-```bash
-pip install pandas matplotlib plotly pysam typer
-```
-
 ## Usage
 
-CQ_tools provides three main commands: `align`, `cq`, and `plot`.
+After installation, you can use the `cq-tools` command directly from your terminal.
 
 ### 1. Alignment (`align`)
 
 Align reads to a reference genome and generate sorted BAM files.
 
 ```bash
-uv run python main.py align 
-    --fasta reference.fasta 
-    --pair-1 sample_R1.fastq.gz 
-    --pair-2 sample_R2.fastq.gz 
-    --output-dir ./results 
+cq-tools align \
+    --fasta reference.fasta \
+    --pair-1 sample_R1.fastq.gz \
+    --pair-2 sample_R2.fastq.gz \
+    --output-dir ./results \
     --cpu 8
 ```
 
@@ -70,11 +70,14 @@ uv run python main.py align
 Calculate coverage, normalize data, and identify specific genomic regions.
 
 ```bash
-uv run python main.py cq 
-    --fasta reference.fasta 
-    --f-bam female_sorted.bam 
-    --m-bam male_sorted.bam 
-    --output-dir ./cq_results 
+cq-tools cq \
+    --fasta reference.fasta \
+    --f-bam female_sorted.bam \
+    --m-bam male_sorted.bam \
+    --output-dir ./cq_results \
+    --cq-value 0.3 \
+    --threshold 0 \
+    --parallel 2
 ```
 
 #### CPM Calculation Principle
@@ -104,10 +107,11 @@ $$CPM = \frac{\text{Reads in Window}}{\text{Total Mapped Reads in Sample}} \time
 Generate distribution plots from existing CQ results.
 
 ```bash
-uv run python main.py plot 
-    --cq-result cq_results/F_M_CQ.filter.tsv 
-    --chrom-length cq_results/chromosome_length.tsv 
-    --output distribution.png 
+cq-tools plot \
+    --cq-result cq_results/F_M_CQ.filter.tsv \
+    --chrom-length cq_results/chromosome_length.tsv \
+    --output distribution.png \
+    --html
 ```
 
 #### Parameter Details:
