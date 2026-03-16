@@ -46,7 +46,7 @@ CQ_tools provides three main commands: `align`, `cq`, and `plot`.
 Align reads to a reference genome and generate sorted BAM files.
 
 ```bash
-python main.py align 
+uv run python main.py align 
     --fasta reference.fasta 
     --pair-1 sample_R1.fastq.gz 
     --pair-2 sample_R2.fastq.gz 
@@ -54,32 +54,74 @@ python main.py align
     --cpu 8
 ```
 
+#### Parameter Details:
+| Parameter | Meaning | Default Value |
+| :--- | :--- | :--- |
+| `--fasta` | Path to the reference genome file (FASTA format) | (Required) |
+| `--pair-1` | Path to the first pair of FASTQ reads | (Required) |
+| `--pair-2` | Path to the second pair of FASTQ reads | (Required) |
+| `--output-dir` | Directory where alignment results will be saved | (Required) |
+| `--cpu` | Number of CPU cores to use for alignment | (Required) |
+
+---
+
 ### 2. CQ Analysis (`cq`)
 
 Calculate coverage, normalize data, and identify specific genomic regions.
 
 ```bash
-python main.py cq 
+uv run python main.py cq 
     --fasta reference.fasta 
     --f-bam female_sorted.bam 
     --m-bam male_sorted.bam 
     --output-dir ./cq_results 
     --cq-value 0.3 
-    --threshold 10 
+    --threshold 0 
     --parallel 2
 ```
+
+#### CPM Calculation Principle
+To ensure coverage is comparable between different samples with varying sequencing depths, the script performs **CPM (Counts Per Million)** normalization on the read counts of each window.
+
+**Formula:**
+$$CPM = \frac{\text{Reads in Window}}{\text{Total Mapped Reads in Sample}} \times 1,000,000$$
+
+*   **Total Mapped Reads**: Obtained using `samtools view -c -F 4` to count all mapped reads in the BAM file.
+*   **Scaling Factor**: The result is scaled by **$10^6$** to represent the number of reads per million mapped reads.
+
+#### Parameter Details:
+| Parameter | Meaning | Default Value |
+| :--- | :--- | :--- |
+| `--fasta` | Path to the reference genome file (used for indexing and windowing) | (Required) |
+| `--f-bam` | Sorted BAM file for the Female sample | (Required) |
+| `--m-bam` | Sorted BAM file for the Male sample | (Required) |
+| `--output-dir` | Directory where CQ analysis results will be saved | (Required) |
+| `--cq-value` | **CQ filtering threshold**. Calculated as `Female_CPM / Male_CPM`. Windows with a CQ value below this threshold are retained. | `0.3` |
+| `--threshold` | **Male CPM filtering threshold**. Windows where the Male CPM (`M_CPM`) is less than or equal to this value are filtered out to exclude low-coverage noise. | `0` |
+| `--parallel` | Parallel processing setting. `1`: Serial; `2`: Parallel (uses multiple processes for coverage calculation). | `2` |
+
+---
 
 ### 3. Visualization (`plot`)
 
 Generate distribution plots from existing CQ results.
 
 ```bash
-python main.py plot 
+uv run python main.py plot 
     --cq-result cq_results/F_M_CQ.filter.tsv 
     --chrom-length cq_results/chromosome_length.tsv 
     --output distribution.png 
     --html
 ```
+
+#### Parameter Details:
+| Parameter | Meaning | Default Value |
+| :--- | :--- | :--- |
+| `--cq-result` | Path to the filtered CQ result TSV file (`F_M_CQ.filter.tsv`) | (Required) |
+| `--chrom-length` | Path to the chromosome length TSV file (`chromosome_length.tsv`) | (Required) |
+| `--output` | Path to save the static distribution plot | `CQ_distribution.png` |
+| `--pdf` | Whether to generate a high-resolution PDF version of the plot | `False` |
+| `--html` | Whether to generate an interactive HTML report (supports zooming and hover details) | `True` |
 
 #### Example Output Plot:
 ![CQ Distribution Plot](CQPlot/CQ_test_plot.png)

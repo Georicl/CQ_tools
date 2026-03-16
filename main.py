@@ -79,9 +79,9 @@ def cq(
         f_bam: str = typer.Option(..., help="Path to the sorted BAM file for the female sample."),
         m_bam: str = typer.Option(..., help="Path to the sorted BAM file for the male sample."),
         output_dir: str = typer.Option(..., help="Directory where CQ results will be saved."),
-        cq_value: float = typer.Option(0.3, help="CQ threshold for filtering (default: 0.3)."),
-        threshold: int = typer.Option(0, help="Minimum M_CPM reads threshold for filtering (default: 0)."),
-        parallel: int = typer.Option(2, help="Parallel processes: 1 (serial) or 2 (parallel). Default: 2."),
+        cq_value: float = typer.Option(0.3, help="CQ threshold for filtering."),
+        threshold: int = typer.Option(0, help="Minimum M_CPM reads threshold for filtering."),
+        parallel: int = typer.Option(2, help="Parallel processes: 1 (serial) or 2 (parallel)."),
 ):
     """
     Calculate CQ values and filter windows based on coverage and CPM.
