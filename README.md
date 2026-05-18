@@ -77,7 +77,9 @@ cq-tools cq \
     --output-dir ./cq_results \
     --cq-value 0.3 \
     --threshold 0 \
-    --parallel 2
+    --parallel 2 \
+    --windows-size 1000 \
+    --step-size 500
 ```
 
 #### CPM Calculation Principle
@@ -99,6 +101,8 @@ $$CPM = \frac{\text{Reads in Window}}{\text{Total Mapped Reads in Sample}} \time
 | `--cq-value` | **CQ filtering threshold**. Calculated as `Female_CPM / Male_CPM`. Windows with a CQ value below this threshold are retained. | `0.3` |
 | `--threshold` | **Male CPM filtering threshold**. Windows where the Male CPM (`M_CPM`) is less than or equal to this value are filtered out to exclude low-coverage noise. | `0` |
 | `--parallel` | Parallel processing setting. `1`: Serial; `2`: Parallel (uses multiple processes for coverage calculation). | `2` |
+| `--windows-size` | **Window Size**. Size of each genomic window in base pairs (bp). | `1000` |
+| `--step-size` | **Step Size**. Step size for sliding windows in base pairs (bp). | `500` |
 
 ---
 
