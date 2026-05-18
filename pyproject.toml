@@ -1,6 +1,6 @@
 [project]
 name = "cq-tools"
-version = "0.1.0"
+version = "0.1.1"
 description = "CQ calculate software"
 requires-python = ">=3.11"
 authors = [{ name = "Yang Xiang", email = "georicl@outlook.com" }]

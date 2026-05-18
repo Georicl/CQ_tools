@@ -26,7 +26,7 @@ CQ_tools is a comprehensive bioinformatics pipeline designed for calculating and
 You can download the `.whl` file from the [Latest Release](https://github.com/yourusername/CQ_tools/releases) and install it using pip:
 
 ```bash
-pip install cq_tools-0.1.0-py3-none-any.whl
+pip install cq_tools-0.1.1-py3-none-any.whl
 ```
 
 ### Option 2: Install for Development (Using uv)
