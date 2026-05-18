@@ -82,6 +82,8 @@ def cq(
         cq_value: float = typer.Option(0.3, help="CQ threshold for filtering."),
         threshold: int = typer.Option(0, help="Minimum M_CPM reads threshold for filtering."),
         parallel: int = typer.Option(2, help="Parallel processes: 1 (serial) or 2 (parallel)."),
+        windows_size: int = typer.Option(1000, help="Size of each window in bp."),
+        step_size: int = typer.Option(500, help="Step size for sliding windows."),
 ):
     """
     Calculate CQ values and filter windows based on coverage and CPM.
@@ -100,7 +102,7 @@ def cq(
     # 1. 建立基因组索引并切分窗口 (Window creation)
     logger.info("Step 1: Genomic window creation...")
     windows = MakeWindows(paths)
-    windows.executor()
+    windows.executor(windows_size, step_size)
 
     # 2. 计算雌雄样本在各窗口的覆盖度 (Coverage calculation)
     logger.info("Step 2: Coverage calculation...")

@@ -81,10 +81,10 @@ class MakeWindows:
             logger.error(f'Error creating windows: {str(e)}')
             raise
 
-    def executor(self):
+    def executor(self, windows_size=1000, step_size=500):
         """
         Runs the full window creation workflow.
         """
         self.build_fai()
         self.calculate_chromosome_length()
-        self.create_windows_py()
+        self.create_windows_py(windows_size, step_size)
